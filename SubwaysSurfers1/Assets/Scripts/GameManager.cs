@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,9 +12,6 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
     
-    [SerializeField] 
-    Text scoreText;
-
     
     void Awake()
     {
@@ -23,12 +19,6 @@ public class GameManager : MonoBehaviour
         audioSrc = GetComponent<AudioSource>();
     }
 
-    
-    void Update()
-    {
-        //Updatuje score
-        scoreText.text = $"Score: {score}";
-    }
 
     public void PlaySound(string name) 
     {
