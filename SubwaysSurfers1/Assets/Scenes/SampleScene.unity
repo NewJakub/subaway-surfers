@@ -493,7 +493,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   crouchedHeight: 0
-  maxAnimator: {fileID: 1660052767413159382}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

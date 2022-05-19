@@ -14,17 +14,18 @@ public class PlayerMovement : MonoBehaviour
     float height;
     public float crouchedHeight;
 
-    private Rigidbody rb;
-    private CapsuleCollider col;
+    Rigidbody rb;
+    CapsuleCollider col;
+    Animator maxAnimator;
 
-    public Animator maxAnimator;
-
-    #region 
+    bool isSliding = false;
+     
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
+        maxAnimator = GetComponent<Animator>();
 
         height = col.height;
     }
@@ -32,12 +33,11 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        Vector3 movement = new Vector3(0, rb.velocity.y, 1 * speed);
-        rb.velocity = movement;
-
+        rb.velocity = new Vector3(0, rb.velocity.y, 1 * speed);
+        
 
         # region JumpingRegion
-        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
+        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space) && !isSliding)
         {
             maxAnimator.SetBool("isJumping", true);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -52,7 +52,9 @@ public class PlayerMovement : MonoBehaviour
         }
         #endregion
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+
+        //Spousti couroutine pokud je zmacknuty shift
+        if (Input.GetKeyDown(KeyCode.LeftShift) && IsGrounded())
         {
             StartCoroutine(SlideTiming());
 
@@ -65,17 +67,21 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+
     private bool IsGrounded()
     {
-
+        //Checkuje jestli je na zemi
         return Physics.CheckCapsule(col.bounds.center, new Vector3(col.bounds.center.x, col.bounds.min.y, col.bounds.center.z), col.radius * .9f, groundLayers);
 
     }
 
-    #endregion
+    
+
+    #region SlidingSetupRegion
 
     void Slide()
     {
+        isSliding = true;
         col.height = crouchedHeight;
         maxAnimator.SetBool("isSliding", true);
         GameManager.instance.PlaySound("swipeDown");
@@ -87,6 +93,7 @@ public class PlayerMovement : MonoBehaviour
 
         col.height = height;
         maxAnimator.SetBool("isSliding", false);
+        isSliding = false;
     }
 
 
@@ -99,6 +106,9 @@ public class PlayerMovement : MonoBehaviour
         StandUp();
         
     }
-} 
+
+    #endregion
+
+}
 
 

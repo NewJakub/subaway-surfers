@@ -5,39 +5,21 @@ using UnityEngine;
 public class SwitchSides : MonoBehaviour
 {
 
-    private Rigidbody rb;
-    private SphereCollider col;
-
-    public GameObject player;
+    [SerializeField]
+    GameObject player;
 
     Animator maxAnimator;
     
-    Vector3[] positions = 
-        {
-            new Vector3(5,0,0),
-            new Vector3(0,0,0),
-            new Vector3(-5,0,0)
+    int positionNum;
+    float subtractionNum;
 
-        };
-    int positionNum = 0;
     Vector2 startMousePos;
     Vector2 endMousePos;
-    float odecteni = 0;
+    
 
-    private void Awake()
-    {
-        
-    }
-
+    
     private void Start()
     {
-        positions[0] = new Vector3(5, player.transform.position.y,0);
-        positions[1] = new Vector3(0, player.transform.position.y, 0);
-        positions[2] = new Vector3(-5, player.transform.position.y, 0);
-
-
-        rb = GetComponent<Rigidbody>();
-        col = GetComponent<SphereCollider>();
         maxAnimator = GetComponent<Animator>();
     }
 
@@ -55,40 +37,52 @@ public class SwitchSides : MonoBehaviour
         {
 
             endMousePos = Input.mousePosition;
-            odecteni = startMousePos.x - endMousePos.x;
+            subtractionNum = startMousePos.x - endMousePos.x;
         }
 
-
-        if (odecteni < 0  && positionNum > -1) 
+        #region CharacterMove
+        if (subtractionNum < 0  && positionNum > -1) 
         {
+            //Jde do prava
+
             positionNum--;
-            transform.position = positions[positionNum + 1];
+
+            Vector3 temp = new Vector3(5, 0, 0);
+            player.transform.position += temp;
             maxAnimator.SetBool("goingRight", true);
-            odecteni = 0f;
-            startMousePos.x = 0f;
-            endMousePos.x = 0f;
-            GameManager.instance.PlaySound("swipeMove");
+            SetZero();
         }
         else
         {
             maxAnimator.SetBool("goingRight", false);
         }
-        if (odecteni > 0 && positionNum < 1)
+        if (subtractionNum > 0 && positionNum < 1)
         {
+            //Jde do leva
+
             positionNum++;
-            transform.position = positions[positionNum + 1];
+
+            Vector3 temp = new Vector3(-5, 0, 0);
+            player.transform.position += temp;
             maxAnimator.SetBool("goingLeft", true);
-            odecteni = 0;
-            startMousePos.x = 0f;
-            endMousePos.x = 0f;
-            GameManager.instance.PlaySound("swipeMove");
+            SetZero();
         }
         else 
         {
             maxAnimator.SetBool("goingLeft", false);
         }
+        #endregion
 
     }
 
-   
+
+    void SetZero() 
+    {
+        //Setuje mouse pos na 0 a hraje zvuk
+        subtractionNum = 0;
+        startMousePos.x = 0f;
+        endMousePos.x = 0f;
+        GameManager.instance.PlaySound("swipeMove");
+    }
+
 }

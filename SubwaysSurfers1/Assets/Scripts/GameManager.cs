@@ -8,22 +8,25 @@ public class GameManager : MonoBehaviour
 
     public int score = 0;
     
-    public AudioClip[] clip;
-    public static GameManager instance;
+    [SerializeField] AudioClip[] clip;
     AudioSource audioSrc;
 
-    public Text scoreText;
+    public static GameManager instance;
+    
+    [SerializeField] 
+    Text scoreText;
 
-    // Start is called before the first frame update
+    
     void Awake()
     {
         instance = this;
         audioSrc = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
+        //Updatuje score
         scoreText.text = $"Score: {score}";
     }
 
