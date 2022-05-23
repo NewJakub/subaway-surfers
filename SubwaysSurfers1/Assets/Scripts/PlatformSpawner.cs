@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class PlatformSpawner : MonoBehaviour
 {
-    public GameObject platform;
+    public GameObject[] platforms;
     
     public Transform endPos;
     public Transform setPos;
-    public Transform bruh;
+    public Transform platformHolder;
     public GameObject platformSpawner;
-    int i = 0;
+    int r = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("Spawn", 1,1);
-        
     }
 
 
@@ -24,10 +23,12 @@ public class PlatformSpawner : MonoBehaviour
     {
 
 
-        Instantiate(setPos, bruh);
+        Instantiate(setPos, platformHolder);
         setPos.transform.position = endPos.transform.position;
 
-        Instantiate(platform, setPos);
+        r = Random.Range(0, 6);
+
+        Instantiate(platforms[r], setPos);
         
         endPos.transform.position += new Vector3(0, 0, 200);
 
