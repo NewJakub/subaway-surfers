@@ -4,34 +4,61 @@ using UnityEngine;
 
 public class PlatformSpawner : MonoBehaviour
 {
-    public GameObject[] platforms;
+    public GameObject platforms;
     
     public Transform endPos;
     public Transform setPos;
     public Transform platformHolder;
-    public GameObject platformSpawner;
-    int r = 0;
+    public Transform player;
+    public Transform destroyPos;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("Spawn", 1,1);
+       
     }
 
+    void Update() 
+    {
+
+        if ( endPos.transform.position.z - player.transform.position.z <= 500) 
+        {
+
+            Spawn();
+
+        }
+
+        if (player.transform.position.z - destroyPos.transform.position.z >= 250)
+        {
+
+            Destroy();
+
+        }
+
+
+    }
 
     void Spawn() 
     {
 
+       
 
-        Instantiate(setPos, platformHolder);
-        setPos.transform.position = endPos.transform.position;
 
-        r = Random.Range(0, 6);
+        Instantiate(platforms, platformHolder);
+        platforms.transform.position = endPos.transform.position;   
 
-        Instantiate(platforms[r], setPos);
+        
         
         endPos.transform.position += new Vector3(0, 0, 200);
 
+    }
+
+    void Destroy()
+    {
+
+        Destroy(platformHolder.transform.GetChild(0).gameObject);
+        destroyPos.transform.position += new Vector3(0,0,100);
     }
 
 }

@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayers;
 
 
-    const float speed = 5;
+    const float speed = 10;
     const float jumpForce = 7;
 
     float height;
