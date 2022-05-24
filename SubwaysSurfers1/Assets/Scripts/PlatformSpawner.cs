@@ -7,7 +7,6 @@ public class PlatformSpawner : MonoBehaviour
     public GameObject platforms;
     
     public Transform endPos;
-    public Transform setPos;
     public Transform platformHolder;
     public Transform player;
     public Transform destroyPos;
@@ -42,8 +41,6 @@ public class PlatformSpawner : MonoBehaviour
     void Spawn() 
     {
 
-       
-
 
         Instantiate(platforms, platformHolder);
         platforms.transform.position = endPos.transform.position;   
@@ -58,7 +55,7 @@ public class PlatformSpawner : MonoBehaviour
     {
 
         Destroy(platformHolder.transform.GetChild(0).gameObject);
-        destroyPos.transform.position += new Vector3(0,0,100);
+        destroyPos.transform.position += new Vector3(0,0,200);
     }
 
 }
