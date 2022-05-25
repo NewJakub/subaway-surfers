@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    public static PlayerMovement instance;
     public LayerMask groundLayers;
 
 
@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     CapsuleCollider col;
     Animator maxAnimator;
 
-    bool isSliding = false;
+    public bool isSliding = false;
      
 
 
@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
         maxAnimator = GetComponent<Animator>();
 
         height = col.height;
+        instance = this;
     }
 
     void Update()
