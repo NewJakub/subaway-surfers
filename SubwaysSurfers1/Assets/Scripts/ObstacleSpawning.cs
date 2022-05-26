@@ -9,7 +9,7 @@ public class ObstacleSpawning : MonoBehaviour
     public Transform spawnPos;
     public Transform obstacleSpawning;
     public Transform player;
-
+    public Transform destroyObjectPos;
     int i = 0;
 
     // Start is called before the first frame update
@@ -31,6 +31,13 @@ public class ObstacleSpawning : MonoBehaviour
             SpawnObject();
 
         }
+
+        if (player.transform.position.z - destroyObjectPos.transform.position.z >= 250)
+        {
+
+            Destroy();
+
+        }
     }
 
     void SpawnObject() 
@@ -44,6 +51,13 @@ public class ObstacleSpawning : MonoBehaviour
 
         i++;
         spawnPos.transform.position += new Vector3(0, 0, 100);
+    }
+
+    void Destroy()
+    {
+        Destroy(gameObject.transform.GetChild(0).gameObject);
+        destroyObjectPos.transform.position += new Vector3(0, 0, 100);
+        i--;
     }
 
 }
