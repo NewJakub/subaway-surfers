@@ -17,6 +17,7 @@ public class PauseMenu : MonoBehaviour
     void Update()
     {
 
+        //Checkuje jestli je pause menu active
         if (pauseMenu.active == false && Input.GetKeyDown(KeyCode.Escape)) 
         {
 

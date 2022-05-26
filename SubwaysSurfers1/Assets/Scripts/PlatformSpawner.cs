@@ -21,6 +21,7 @@ public class PlatformSpawner : MonoBehaviour
     void Update() 
     {
 
+        //Checkuje vzdalenost a podle toho spawnuje nebo nici platformy
         if ( endPos.transform.position.z - player.transform.position.z <= 500) 
         {
 
@@ -40,12 +41,10 @@ public class PlatformSpawner : MonoBehaviour
 
     void Spawn() 
     {
-
-
+        //Platforma se vytvori na pozici a jako child do platform holderu
         Instantiate(platforms, platformHolder);
+        //Menime pozici platformi podle toho kde je end pos
         platforms.transform.position = endPos.transform.position;   
-
-        
         
         endPos.transform.position += new Vector3(0, 0, 200);
 
@@ -53,7 +52,6 @@ public class PlatformSpawner : MonoBehaviour
 
     void Destroy()
     {
-
         Destroy(platformHolder.transform.GetChild(0).gameObject);
         destroyPos.transform.position += new Vector3(0,0,200);
     }

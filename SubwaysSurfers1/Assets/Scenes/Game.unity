@@ -2184,6 +2184,7 @@ MonoBehaviour:
   - {fileID: 2906055422926639920, guid: e7c150c9205bafa4fb74aa00bafc2101, type: 3}
   spawnPos: {fileID: 1082778508}
   obstacleSpawning: {fileID: 2015996876}
+  player: {fileID: 1660052767413590071}
 --- !u!4 &2015996876
 Transform:
   m_ObjectHideFlags: 0

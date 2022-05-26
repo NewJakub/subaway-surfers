@@ -8,6 +8,7 @@ public class ObstacleSpawning : MonoBehaviour
 
     public Transform spawnPos;
     public Transform obstacleSpawning;
+    public Transform player;
 
     int i = 0;
 
@@ -24,15 +25,21 @@ public class ObstacleSpawning : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (spawnPos.transform.position.z - player.transform.position.z <= 500)
+        {
+
+            SpawnObject();
+
+        }
     }
 
     void SpawnObject() 
     {
         int r = Random.RandomRange(0, 4);
         
+        //Spawnuje prekazky
+        Instantiate(obstacle[r], obstacleSpawning);
 
-        Instantiate(obstacle[r  ], obstacleSpawning);
         gameObject.transform.GetChild(i).transform.position = spawnPos.transform.position;
 
         i++;

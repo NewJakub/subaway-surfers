@@ -24,6 +24,7 @@ public class PlayerScript : MonoBehaviour
             Destroy(other.gameObject);
         }
 
+        //Pro prekazky u kterych se da slidovat
         if (other.gameObject.tag == "SlidingObstacle" && !PlayerMovement.instance.isSliding) 
         {
 
