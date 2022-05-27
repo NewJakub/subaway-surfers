@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
     public GameObject OptionsMenu;
     public GameObject StartMenu;
-    public AudioMixer musicMixer;
+
+    public Slider slider;
 
     // Start is called before the first frame update
     void Start()
@@ -54,8 +56,8 @@ public class MainMenu : MonoBehaviour
     public void SetVolume(float volume)
     {
 
-
-        musicMixer.SetFloat("volume", volume);
+        AudioListener.volume = slider.value;
+        //musicMixer.SetFloat("volume", volume);
 
     }
 
