@@ -1247,6 +1247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414c7e98a6f22304a81d2b0859210685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
+  jsonText: {fileID: 4900000, guid: f745232cfea60be4788b884f369878f3, type: 3}
 --- !u!1 &1156322473
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,7 +1355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OptionsMenu: {fileID: 269965856}
   StartMenu: {fileID: 709131062}
-  slider: {fileID: 1587860082}
+  slider: {fileID: 0}
 --- !u!4 &1157326445
 Transform:
   m_ObjectHideFlags: 0

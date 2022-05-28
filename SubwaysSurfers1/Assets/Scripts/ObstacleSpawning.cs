@@ -42,7 +42,7 @@ public class ObstacleSpawning : MonoBehaviour
 
     void SpawnObject() 
     {
-        int r = Random.RandomRange(0, 4);
+        int r = Random.Range(0, 4);
         
         //Spawnuje prekazky
         Instantiate(obstacle[r], obstacleSpawning);
