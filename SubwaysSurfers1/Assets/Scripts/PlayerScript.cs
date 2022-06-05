@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class PlayerScript : MonoBehaviour
 {
     [SerializeField]
-    Text scoreText;
+    public Text scoreText;
     public GameObject gameOverMenu;
-
+    
     private void Start()
     {
         gameOverMenu.SetActive(false);

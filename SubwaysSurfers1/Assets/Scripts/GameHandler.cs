@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
@@ -6,7 +6,7 @@ using UnityEngine.Audio;
   
 public class GameHandler : MonoBehaviour
 {
-    static GameHandler instance;
+    public static GameHandler instance;
     public TextAsset jsonText;
     
         
@@ -23,14 +23,15 @@ public class GameHandler : MonoBehaviour
         instance = this;
 
         OptionsData optionsData = new OptionsData();
-        AudioListener.volume = optionsData.sound;
+        
         
 
         string json = JsonUtility.ToJson(optionsData);
-        File.WriteAllText(Application.dataPath + "/TextFiles/JSONText.json", json);
+        File.WriteAllText(jsonText.text, json);
 
         optionsData = JsonUtility.FromJson<OptionsData>(jsonText.text);
         print(optionsData.sound);
+        AudioListener.volume = optionsData.sound;
     }
 
     // Update is called once per frame

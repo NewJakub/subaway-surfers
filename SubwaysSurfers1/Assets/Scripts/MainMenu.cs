@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
-using UnityEngine.UIElements;
-
+using UnityEngine.UI;
+using System.IO;
 public class MainMenu : MonoBehaviour
 {
     public GameObject OptionsMenu;
@@ -58,7 +58,8 @@ public class MainMenu : MonoBehaviour
 
         AudioListener.volume = slider.value;
         //musicMixer.SetFloat("volume", volume);
-
+        string json = JsonUtility.ToJson(slider.value);
+        File.WriteAllText(Application.dataPath + "/TextFiles/JSONText.json", json);
     }
 
 }
