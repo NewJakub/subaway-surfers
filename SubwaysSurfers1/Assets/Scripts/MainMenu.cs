@@ -58,8 +58,8 @@ public class MainMenu : MonoBehaviour
 
         AudioListener.volume = slider.value;
         //musicMixer.SetFloat("volume", volume);
-        string json = JsonUtility.ToJson(slider.value);
-        File.WriteAllText(Application.dataPath + "/TextFiles/JSONText.json", json);
+        //string json = JsonUtility.ToJson(slider.value);
+        //File.WriteAllText(Application.dataPath + "/TextFiles/JSONText.json", json);
     }
 
 }
