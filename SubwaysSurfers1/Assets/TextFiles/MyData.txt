@@ -1,1 +1,1 @@
-{"sound":0.5,"name":"Max"}
+{"sound":0.5}

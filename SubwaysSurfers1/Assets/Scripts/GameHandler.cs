@@ -6,7 +6,7 @@ using UnityEngine.Audio;
   
 public class GameHandler : MonoBehaviour
 {
-    public class SaveData : MonoBehaviour
+    public class SaveData 
     {
         public float sound;
         
@@ -28,23 +28,23 @@ public class GameHandler : MonoBehaviour
     {
 
         SaveData sd = new SaveData() { sound = 0.5f };
-        sd.name = "Max";
-        sd.sound = 0.5f;
+
         string dir = Application.dataPath + directory;
         //Directory.CreateDirectory(dir);
-        
+
 
         
         
         
-
+        
         string json = JsonUtility.ToJson(sd);
         File.WriteAllText(dir + fileName, json);
 
 
         //print(optionsData.sound);
         //AudioListener.volume = optionsData.sound;
-        SaveData loadData =  JsonUtility.FromJson<SaveData>(json);
+        string readFile = File.ReadAllText(dir + fileName);
+        SaveData loadData =  JsonUtility.FromJson<SaveData>(readFile);
         print(loadData.sound);
     }
 
