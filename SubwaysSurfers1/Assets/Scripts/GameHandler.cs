@@ -6,18 +6,28 @@ using UnityEngine.Audio;
   
 public class GameHandler : MonoBehaviour
 {
+    public class SaveData : MonoBehaviour
+    {
+        public float sound;
+        
+    }
 
-    string path;
+
     string directory = "/TextFiles/";
     string fileName = "MyData.txt";
+    
 
-    public SaveData sd;
+    
+    public TextAsset myData;
     //[System.Serializable]
-   
+
+
+    
     // Start is called before the first frame update
     void Start()
     {
-        SaveData sd = new SaveData();
+
+        SaveData sd = new SaveData() { sound = 0.5f };
         sd.name = "Max";
         sd.sound = 0.5f;
         string dir = Application.dataPath + directory;
@@ -31,9 +41,11 @@ public class GameHandler : MonoBehaviour
         string json = JsonUtility.ToJson(sd);
         File.WriteAllText(dir + fileName, json);
 
-        //optionsData = JsonUtility.FromJson<OptionsData>(jsonText.text);
+
         //print(optionsData.sound);
         //AudioListener.volume = optionsData.sound;
+        SaveData loadData =  JsonUtility.FromJson<SaveData>(json);
+        print(loadData.sound);
     }
 
     // Update is called once per frame
