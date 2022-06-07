@@ -57,6 +57,9 @@ public class MainMenu : MonoBehaviour
     {
 
         AudioListener.volume = slider.value;
+
+        GameHandler.instance.sound = AudioListener.volume;
+        GameHandler.instance.setSound = true;
         //musicMixer.SetFloat("volume", volume);
         //string json = JsonUtility.ToJson(slider.value);
         //File.WriteAllText(Application.dataPath + "/TextFiles/JSONText.json", json);
