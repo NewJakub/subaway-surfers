@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
     public GameObject OptionsMenu;
     public GameObject StartMenu;
 
-    public Slider slider;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -53,16 +53,6 @@ public class MainMenu : MonoBehaviour
 
     }
 
-    public void SetVolume(float volume)
-    {
-
-        AudioListener.volume = slider.value;
-
-        GameHandler.instance.sound = AudioListener.volume;
-        GameHandler.instance.setSound = true;
-        //musicMixer.SetFloat("volume", volume);
-        //string json = JsonUtility.ToJson(slider.value);
-        //File.WriteAllText(Application.dataPath + "/TextFiles/JSONText.json", json);
-    }
+   
 
 }

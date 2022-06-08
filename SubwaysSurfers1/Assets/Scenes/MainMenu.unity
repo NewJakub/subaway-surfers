@@ -1247,6 +1247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414c7e98a6f22304a81d2b0859210685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 1587860082}
+  directory: /TextFiles/
   myData: {fileID: 4900000, guid: 8512ae32a79305f42a892e44908a3fde, type: 3}
 --- !u!1 &1156322473
 GameObject:
@@ -1354,7 +1356,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OptionsMenu: {fileID: 269965856}
   StartMenu: {fileID: 709131062}
-  slider: {fileID: 1587860082}
 --- !u!4 &1157326445
 Transform:
   m_ObjectHideFlags: 0
@@ -2048,8 +2049,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1157326444}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 898330313}
+        m_TargetAssemblyTypeName: GameHandler, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 4
         m_Arguments:

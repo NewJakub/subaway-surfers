@@ -3,55 +3,74 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.Audio;
-  
+using UnityEngine.UI;
+
 public class GameHandler : MonoBehaviour
 {
+    public Slider slider;
+    public static GameHandler instance;
     public class SaveData 
     {
+
         public float sound;
         
     }
 
 
-    string directory = "/TextFiles/";
+    public string directory = "/TextFiles/";
     string fileName = "MyData.txt";
-    
 
-    
+
+
     public TextAsset myData;
-    //[System.Serializable]
-
-
     
-    // Start is called before the first frame update
-    void Start()
+
+    public void Start()
     {
 
-        SaveData sd = new SaveData() { sound = 0.5f };
+        SaveData sd = new SaveData() { sound = 0 };
+
 
         string dir = Application.dataPath + directory;
-        //Directory.CreateDirectory(dir);
 
 
-        
-        
-        
-        
+
+
+
+
         string json = JsonUtility.ToJson(sd);
-        File.WriteAllText(dir + fileName, json);
+        //File.WriteAllText(dir + fileName, json);
 
-
-        //print(optionsData.sound);
-        //AudioListener.volume = optionsData.sound;
+        
         string readFile = File.ReadAllText(dir + fileName);
         SaveData loadData =  JsonUtility.FromJson<SaveData>(readFile);
+
+        AudioListener.volume = loadData.sound;
+
+        slider.value = loadData.sound;
         print(loadData.sound);
+
+        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        instance = this;
     }
-    
+
+    public void SetVolume(float volume)
+    {
+        SaveData sd2 = new SaveData() { sound = 0 };
+        AudioListener.volume = slider.value;
+        sd2.sound = AudioListener.volume;
+
+        string dir = Application.dataPath + directory;
+        string json = JsonUtility.ToJson(sd2);
+        File.WriteAllText(dir + fileName, json);
+
+        //musicMixer.SetFloat("volume", volume);
+        //string json = JsonUtility.ToJson(slider.value);
+        //File.WriteAllText(Application.dataPath + "/TextFiles/JSONText.json", json);
+    }
 }
