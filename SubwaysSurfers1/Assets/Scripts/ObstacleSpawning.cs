@@ -55,6 +55,7 @@ public class ObstacleSpawning : MonoBehaviour
 
     void Destroy()
     {
+        
         Destroy(gameObject.transform.GetChild(0).gameObject);
         destroyObjectPos.transform.position += new Vector3(0, 0, 100);
         i--;

@@ -1,4 +1,4 @@
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
@@ -6,71 +6,58 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class GameHandler : MonoBehaviour
-{
-    public Slider slider;
+{   
+    [SerializeField]
+    Slider slider;
     public static GameHandler instance;
-    public class SaveData 
-    {
-
-        public float sound;
-        
-    }
 
 
     public string directory = "/TextFiles/";
     string fileName = "MyData.txt";
 
 
-
     public TextAsset myData;
-    
-
-    public void Start()
-    {
-
-        SaveData sd = new SaveData() { sound = 0 };
-
-
-        string dir = Application.dataPath + directory;
-
-
-
-
-
-
-        string json = JsonUtility.ToJson(sd);
-        //File.WriteAllText(dir + fileName, json);
-
-        
-        string readFile = File.ReadAllText(dir + fileName);
-        SaveData loadData =  JsonUtility.FromJson<SaveData>(readFile);
-
-        AudioListener.volume = loadData.sound;
-
-        slider.value = loadData.sound;
-        print(loadData.sound);
-
-        
-
-    }
 
     private void Awake()
     {
         instance = this;
     }
 
+    private void Start()
+    {
+
+        SaveData sd = new SaveData() { sound = 0 };
+
+        string dir = Application.dataPath + directory;
+
+        //Prevadime SaveData sd na JSON
+        string json = JsonUtility.ToJson(sd);
+
+        
+        string readFile = File.ReadAllText(dir + fileName);
+        //Prevadime z JSON
+        SaveData loadData =  JsonUtility.FromJson<SaveData>(readFile);
+
+        AudioListener.volume = loadData.sound;
+
+        //Slider se setuje na zacatecni pozici
+        slider.value = loadData.sound;
+        
+
+        
+
+    }
+
     public void SetVolume(float volume)
     {
         SaveData sd2 = new SaveData() { sound = 0 };
+
         AudioListener.volume = slider.value;
         sd2.sound = AudioListener.volume;
 
         string dir = Application.dataPath + directory;
         string json = JsonUtility.ToJson(sd2);
+        //Prepisujeme data
         File.WriteAllText(dir + fileName, json);
-
-        //musicMixer.SetFloat("volume", volume);
-        //string json = JsonUtility.ToJson(slider.value);
-        //File.WriteAllText(Application.dataPath + "/TextFiles/JSONText.json", json);
     }
 }

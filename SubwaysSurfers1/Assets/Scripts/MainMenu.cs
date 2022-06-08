@@ -19,11 +19,6 @@ public class MainMenu : MonoBehaviour
         OptionsMenu.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void Quit()
     {
@@ -34,13 +29,14 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame() 
     {
-
+        //Loaduje scenu
         SceneManager.LoadScene(1);
     
     }
 
     public void Options() 
     {
+        //Aktivuje optioons menu
         StartMenu.SetActive(false);
         OptionsMenu.SetActive(true);
         
@@ -48,9 +44,9 @@ public class MainMenu : MonoBehaviour
 
     public void QuitOptions() 
     {
+        //Deaktivuje options menu
         StartMenu.SetActive(true);
         OptionsMenu.SetActive(false);
-
     }
 
    
