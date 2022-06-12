@@ -10,13 +10,67 @@ public class PlatformSpawner : MonoBehaviour
     public Transform platformHolder;
     public Transform player;
     public Transform destroyPos;
-    
 
-    // Start is called before the first frame update
-    void Start()
+    public static PlatformSpawner instance;
+
+    //public Queue<GameObject> pool = new Queue<GameObject>();
+
+    public int poolSize = 5;
+
+    private void Awake()
     {
-       
+        instance = this;
+
+        for (int i = 0; i < poolSize; i++)
+        {
+            
+            GameObject prefab = Instantiate(platforms);
+            
+            prefab.SetActive(true);
+            prefab.transform.position = endPos.transform.position;
+            endPos.transform.position += new Vector3(0, 0, 200);
+            prefab.transform.parent = platformHolder;
+            
+        }
+
     }
+
+    void Update()
+    {
+
+        //Checkuje vzdalenost a podle toho spawnuje nebo nici platformy
+        if (endPos.transform.position.z - player.transform.position.z <= 500)
+        {
+            //platformHolder.transform.GetChild(0).gameObject.transform.position += new Vector3(0, 0, 1000);
+
+            Push();
+
+        }
+    }
+
+
+    void Push()
+    {
+        //Platforma se vytvori na pozici a jako child do platform holderu
+
+        //Menime pozici platformi podle toho kde je end pos
+        
+        platforms.transform.position = endPos.transform.position;
+
+        endPos.transform.position += new Vector3(0, 0, 200);
+
+    }
+
+
+    //public GameObject GetPlatform()
+    //{
+    //    //GameObject platformDequeue = pool.Dequeue();
+    //    //platformDequeue.SetActive(true);
+    //    //return platformDequeue;
+    //}
+
+    /*    
+
 
     void Update() 
     {
@@ -24,6 +78,7 @@ public class PlatformSpawner : MonoBehaviour
         //Checkuje vzdalenost a podle toho spawnuje nebo nici platformy
         if ( endPos.transform.position.z - player.transform.position.z <= 500) 
         {
+            platformHolder.transform.GetChild(0).gameObject.transform.position += new Vector3(0, 0, 1000);
 
             Spawn();
 
@@ -32,28 +87,20 @@ public class PlatformSpawner : MonoBehaviour
         if (player.transform.position.z - destroyPos.transform.position.z >= 250)
         {
 
-            Destroy();
+            PushPlatform();
 
         }
 
 
     }
 
-    void Spawn() 
-    {
-        //Platforma se vytvori na pozici a jako child do platform holderu
-        Instantiate(platforms, platformHolder);
-        //Menime pozici platformi podle toho kde je end pos
-        platforms.transform.position = endPos.transform.position;   
-        
-        endPos.transform.position += new Vector3(0, 0, 200);
 
-    }
 
-    void Destroy()
+    void PushPlatform()
     {
-        Destroy(platformHolder.transform.GetChild(0).gameObject);
+        //Destroy(platformHolder.transform.GetChild(0).gameObject);
+        platformHolder.transform.GetChild(0).gameObject.transform.position += new Vector3(0, 0, 100); 
         destroyPos.transform.position += new Vector3(0,0,200);
     }
-
+    */
 }
