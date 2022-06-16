@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlatformSpawner : MonoBehaviour
 {
-    public GameObject platforms;
+    public GameObject[] platforms;
     
     public Transform endPos;
     public Transform platformHolder;
@@ -13,7 +13,7 @@ public class PlatformSpawner : MonoBehaviour
     public List<GameObject> pooledObjects = new List<GameObject>();
     public static PlatformSpawner instance;
 
-    
+    int r;
 
     public Queue<GameObject> pool = new Queue<GameObject>();
     
@@ -31,10 +31,10 @@ public class PlatformSpawner : MonoBehaviour
     {
         for (int i = 0; i < poolSize; i++)
         {
-            
+            r = Random.Range(0, 2);
 
 
-            GameObject prefab = Instantiate(platforms);
+            GameObject prefab = Instantiate(platforms[r]);
             pooledObjects.Add(prefab);
             prefab.SetActive(false);
             
@@ -70,14 +70,13 @@ public class PlatformSpawner : MonoBehaviour
 
     public GameObject GetPooledObject()
     {
-        
-        for (int i = 0; i < poolSize; i++)
+        r = Random.Range(0, 10);
+        GameObject prefab = pooledObjects[r];
+        if (!prefab.activeInHierarchy)
         {
-            if (!pooledObjects[i].activeInHierarchy)
-            {
-                return pooledObjects[i];
-            }
+            return prefab;
         }
+        
         return null;
     }
 

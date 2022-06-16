@@ -2092,12 +2092,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77dfd3f0c14eefd45a29f58381ca9bca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platforms: {fileID: 5696560992286344656, guid: 23ede32a96097da4dae55bf9fb3d270b, type: 3}
+  platforms:
+  - {fileID: 5696560992286344656, guid: 23ede32a96097da4dae55bf9fb3d270b, type: 3}
+  - {fileID: 6245216002236667057, guid: faed3c65466f67e40b26c0189a5f3446, type: 3}
   endPos: {fileID: 270266699}
   platformHolder: {fileID: 1849832331}
   player: {fileID: 1660052767413590071}
   destroyPos: {fileID: 511196924}
   pooledObjects: []
+  poolSize: 10
 --- !u!4 &1988865890
 Transform:
   m_ObjectHideFlags: 0
