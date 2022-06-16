@@ -4,61 +4,96 @@ using UnityEngine;
 
 public class ObstacleSpawning : MonoBehaviour
 {
-    public GameObject[] obstacle;
+    public GameObject obstacle;
 
     public Transform spawnPos;
     public Transform obstacleSpawning;
     public Transform player;
     public Transform destroyObjectPos;
     int i = 0;
+    public GameObject obstacleHolder;
+
+    public int poolSize = 5;
+    public static ObstacleSpawning instance;
+    private void Awake()
+    {
+        instance = this;
+
+        for (int i = 0; i < poolSize; i++)
+        {
+            int r = Random.Range(0, 2);
+            GameObject prefab = Instantiate(obstacle);
+
+            prefab.SetActive(true);
+            prefab.transform.position = spawnPos.transform.position;
+            spawnPos.transform.position += new Vector3(0, 0, 100);
+            prefab.transform.parent = obstacleHolder.transform;
+
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
-        spawnPos.transform.position = new Vector3(0, 0, 200);
+    //void Start()
+    //{
 
-        
-        InvokeRepeating("SpawnObject", 2, 1);
-    }
+    //    spawnPos.transform.position = new Vector3(0, 0, 200);
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (spawnPos.transform.position.z - player.transform.position.z <= 500)
-        {
 
-            SpawnObject();
+    //    InvokeRepeating("SpawnObject", 2, 1);
+    //}
 
-        }
+    //// Update is called once per frame
+    //void Update()
+    //{
+    //    if (spawnPos.transform.position.z - player.transform.position.z <= 500)
+    //    {
 
-        if (player.transform.position.z - destroyObjectPos.transform.position.z >= 250)
-        {
+    //        SpawnObject();
 
-            Destroy();
+    //    }
 
-        }
-    }
+    //    if (player.transform.position.z - destroyObjectPos.transform.position.z >= 250)
+    //    {
 
-    void SpawnObject() 
-    {
-        int r = Random.Range(0, 4);
-        
-        //Spawnuje prekazky
-        Instantiate(obstacle[r], obstacleSpawning);
+    //        Destroy();
 
-        gameObject.transform.GetChild(i).transform.position = spawnPos.transform.position;
+    //    }
+    //}
 
-        i++;
-        spawnPos.transform.position += new Vector3(0, 0, 100);
-    }
+    //void SpawnObject() 
+    //{
+    //    int r = Random.Range(0, 4);
 
-    void Destroy()
-    {
-        
-        Destroy(gameObject.transform.GetChild(0).gameObject);
-        destroyObjectPos.transform.position += new Vector3(0, 0, 100);
-        i--;
-    }
+    //    //Spawnuje prekazky
+    //    Instantiate(obstacle[r], obstacleSpawning);
+
+    //    gameObject.transform.GetChild(i).transform.position = spawnPos.transform.position;
+
+    //    i++;
+    //    spawnPos.transform.position += new Vector3(0, 0, 100);
+    //}
+
+    //void Destroy()
+    //{
+
+    //    Destroy(gameObject.transform.GetChild(0).gameObject);
+    //    destroyObjectPos.transform.position += new Vector3(0, 0, 100);
+    //    i--;
+    //}
 
 }

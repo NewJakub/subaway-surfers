@@ -10,55 +10,75 @@ public class PlatformSpawner : MonoBehaviour
     public Transform platformHolder;
     public Transform player;
     public Transform destroyPos;
-
+    public List<GameObject> pooledObjects = new List<GameObject>();
     public static PlatformSpawner instance;
 
-    //public Queue<GameObject> pool = new Queue<GameObject>();
+    
 
-    public int poolSize = 5;
+    public Queue<GameObject> pool = new Queue<GameObject>();
+    
+    public int poolSize = 3;
+
 
     private void Awake()
     {
         instance = this;
 
+        
+
+    }
+    private void Start()
+    {
         for (int i = 0; i < poolSize; i++)
         {
             
+
+
             GameObject prefab = Instantiate(platforms);
+            pooledObjects.Add(prefab);
+            prefab.SetActive(false);
             
-            prefab.SetActive(true);
-            prefab.transform.position = endPos.transform.position;
-            endPos.transform.position += new Vector3(0, 0, 200);
+
+            //prefab.transform.position = endPos.transform.position;
+            //endPos.transform.position += new Vector3(0, 0, 200);
             prefab.transform.parent = platformHolder;
-            
+
         }
-
     }
-
     void Update()
     {
 
         //Checkuje vzdalenost a podle toho spawnuje nebo nici platformy
         if (endPos.transform.position.z - player.transform.position.z <= 500)
         {
+            GameObject currentPlatform = instance.GetPooledObject();
             //platformHolder.transform.GetChild(0).gameObject.transform.position += new Vector3(0, 0, 1000);
 
-            Push();
+            if (currentPlatform != null)
+            {
+                currentPlatform.transform.position = endPos.transform.position;
+                currentPlatform.SetActive(true);
 
+                endPos.transform.position += new Vector3(0, 0, 200);
+
+            }
         }
     }
 
 
-    void Push()
+    
+
+    public GameObject GetPooledObject()
     {
-        //Platforma se vytvori na pozici a jako child do platform holderu
-
-        //Menime pozici platformi podle toho kde je end pos
         
-        platforms.transform.position = endPos.transform.position;
-
-        endPos.transform.position += new Vector3(0, 0, 200);
-
+        for (int i = 0; i < poolSize; i++)
+        {
+            if (!pooledObjects[i].activeInHierarchy)
+            {
+                return pooledObjects[i];
+            }
+        }
+        return null;
     }
 
 
@@ -101,6 +121,19 @@ public class PlatformSpawner : MonoBehaviour
         //Destroy(platformHolder.transform.GetChild(0).gameObject);
         platformHolder.transform.GetChild(0).gameObject.transform.position += new Vector3(0, 0, 100); 
         destroyPos.transform.position += new Vector3(0,0,200);
+    }
+
+    void Push()
+    {
+        
+        //Platforma se vytvori na pozici a jako child do platform holderu
+
+        //Menime pozici platformi podle toho kde je end pos
+
+        platforms[r].transform.position = endPos.transform.position;
+
+        endPos.transform.position += new Vector3(0, 0, 200);
+
     }
     */
 }

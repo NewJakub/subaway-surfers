@@ -322,7 +322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270266698}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 100}
+  m_LocalPosition: {x: 0, y: 0, z: 200}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1062,6 +1062,36 @@ Transform:
   m_Father: {fileID: 1660052767413590071}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 33.046, y: 0, z: 0}
+--- !u!1 &1054803369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1054803370}
+  m_Layer: 0
+  m_Name: ObstacleHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1054803370
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1054803369}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -13.841202, y: 10.322563, z: 134.9961}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1082778507
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,7 +1116,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1082778507}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.0682654, y: 9.844228, z: -48.232876}
+  m_LocalPosition: {x: 0, y: 0, z: -48.23029}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2067,6 +2097,7 @@ MonoBehaviour:
   platformHolder: {fileID: 1849832331}
   player: {fileID: 1660052767413590071}
   destroyPos: {fileID: 511196924}
+  pooledObjects: []
 --- !u!4 &1988865890
 Transform:
   m_ObjectHideFlags: 0
@@ -2111,15 +2142,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 849f692224ec7e34bbcfe5aaad3298d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacle:
-  - {fileID: 8863144808216708915, guid: a4346db378198f84ab1da0be635c2930, type: 3}
-  - {fileID: 6109064063953001726, guid: 1e1158d7d7696d54eb4f19dec37454e1, type: 3}
-  - {fileID: 274660238420806457, guid: 1d33834d3ccc0cf48aba34611b11ed2f, type: 3}
-  - {fileID: 2906055422926639920, guid: e7c150c9205bafa4fb74aa00bafc2101, type: 3}
+  obstacle: {fileID: 8863144808216708915, guid: a4346db378198f84ab1da0be635c2930, type: 3}
   spawnPos: {fileID: 1082778508}
   obstacleSpawning: {fileID: 2015996876}
   player: {fileID: 1660052767413590071}
   destroyObjectPos: {fileID: 2026510529}
+  obstacleHolder: {fileID: 1054803369}
+  poolSize: 5
 --- !u!4 &2015996876
 Transform:
   m_ObjectHideFlags: 0
@@ -2128,7 +2157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015996874}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40.984535, y: -8.750277, z: -74.816216}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
