@@ -9,50 +9,42 @@ public class PlatformSpawner : MonoBehaviour
     public Transform endPos;
     public Transform platformHolder;
     public Transform player;
-    public Transform destroyPos;
     public List<GameObject> pooledObjects = new List<GameObject>();
     public static PlatformSpawner instance;
 
     int r;
-
-    public Queue<GameObject> pool = new Queue<GameObject>();
     
-    public int poolSize = 3;
+    int poolSize = 10;
 
 
     private void Awake()
     {
         instance = this;
 
-        
-
-    }
-    private void Start()
-    {
         for (int i = 0; i < poolSize; i++)
         {
-            r = Random.Range(0, 2);
+            r = Random.Range(0, platforms.Length);
 
 
             GameObject prefab = Instantiate(platforms[r]);
             pooledObjects.Add(prefab);
             prefab.SetActive(false);
-            
 
-            //prefab.transform.position = endPos.transform.position;
-            //endPos.transform.position += new Vector3(0, 0, 200);
+
+            
             prefab.transform.parent = platformHolder;
 
         }
+
     }
+    
     void Update()
     {
 
-        //Checkuje vzdalenost a podle toho spawnuje nebo nici platformy
         if (endPos.transform.position.z - player.transform.position.z <= 500)
         {
             GameObject currentPlatform = instance.GetPooledObject();
-            //platformHolder.transform.GetChild(0).gameObject.transform.position += new Vector3(0, 0, 1000);
+           
 
             if (currentPlatform != null)
             {
@@ -70,7 +62,7 @@ public class PlatformSpawner : MonoBehaviour
 
     public GameObject GetPooledObject()
     {
-        r = Random.Range(0, 10);
+        r = Random.Range(0, poolSize);
         GameObject prefab = pooledObjects[r];
         if (!prefab.activeInHierarchy)
         {
