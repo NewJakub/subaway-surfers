@@ -1063,7 +1063,7 @@ GameObject:
   - component: {fileID: 1213009925}
   - component: {fileID: 1213009924}
   m_Layer: 5
-  m_Name: ScoreText
+  m_Name: GameOverText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1599,9 +1599,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'ScoreText
-
-'
+  m_Text: 'Score: 0'
 --- !u!222 &1767840107
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1959,9 +1957,7 @@ MonoBehaviour:
   endPos: {fileID: 270266699}
   platformHolder: {fileID: 1849832331}
   player: {fileID: 1660052767413590071}
-  destroyPos: {fileID: 511196924}
   pooledObjects: []
-  poolSize: 10
 --- !u!4 &1988865890
 Transform:
   m_ObjectHideFlags: 0
@@ -3288,6 +3284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1767840106}
   gameOverMenu: {fileID: 809596363}
+  isDead: 0
 --- !u!1 &1660052767413159389
 GameObject:
   m_ObjectHideFlags: 0

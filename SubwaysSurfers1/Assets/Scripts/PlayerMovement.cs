@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     Animator maxAnimator;
 
     public bool isSliding = false;
-     
+    
 
 
     void Start()

@@ -14,7 +14,7 @@ public class PlatformSpawner : MonoBehaviour
 
     int r;
     
-    int poolSize = 10;
+    public int poolSize = 10;
 
 
     private void Awake()

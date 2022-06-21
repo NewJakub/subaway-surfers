@@ -5,10 +5,18 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
-    [SerializeField]
+    
     public Text scoreText;
     public GameObject gameOverMenu;
-    
+    public static PlayerScript instance;
+
+    public bool isDead = false;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
         gameOverMenu.SetActive(false);
@@ -16,7 +24,7 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Coin") 
+        if (other.CompareTag("Coin"))
         {
             GameManager.instance.score++;
             //Updatuje score
@@ -25,13 +33,7 @@ public class PlayerScript : MonoBehaviour
         }
 
         //Pro prekazky u kterych se da slidovat
-        if (other.gameObject.tag == "SlidingObstacle" && !PlayerMovement.instance.isSliding) 
-        {
-
-            Die();
-        
-        }
-        if (other.gameObject.tag == "Obstacle") 
+        if (other.CompareTag("SlidingObstacle")  && !PlayerMovement.instance.isSliding || other.CompareTag("Obstacle")) 
         {
 
             Die();
@@ -42,6 +44,7 @@ public class PlayerScript : MonoBehaviour
 
     void Die() 
     {
+        isDead = true;
         Time.timeScale = 0;
         gameOverMenu.SetActive(true);
         

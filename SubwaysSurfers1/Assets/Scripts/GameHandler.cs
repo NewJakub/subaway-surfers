@@ -13,7 +13,7 @@ public class GameHandler : MonoBehaviour
 
 
     public string directory = "/TextFiles/";
-    string fileName = "MyData.txt";
+    const string fileName = "MyData.txt";
 
 
     public TextAsset myData;
@@ -26,12 +26,12 @@ public class GameHandler : MonoBehaviour
     private void Start()
     {
 
-        SaveData sd = new SaveData() { sound = 0 };
+        
 
         string dir = Application.dataPath + directory;
 
         //Prevadime SaveData sd na JSON
-        string json = JsonUtility.ToJson(sd);
+        
 
         
         string readFile = File.ReadAllText(dir + fileName);
