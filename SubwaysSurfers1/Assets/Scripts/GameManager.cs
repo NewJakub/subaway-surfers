@@ -19,7 +19,10 @@ public class GameManager : MonoBehaviour
         audioSrc = GetComponent<AudioSource>();
     }
 
-
+    private void Start()
+    {
+        
+    }
     public void PlaySound(string name) 
     {
         switch (name) {
@@ -41,6 +44,29 @@ public class GameManager : MonoBehaviour
 
                 audioSrc.PlayOneShot(clip[2]);
 
+                break;
+
+            case "coin_1":
+
+                audioSrc.PlayOneShot(clip[3]);
+
+                break;
+
+            case "coin_2":
+
+                audioSrc.PlayOneShot(clip[4]);
+
+                break;
+
+            case "coin_3":
+
+                audioSrc.PlayOneShot(clip[5]);
+
+                break;
+
+
+            default:
+                Debug.LogWarning("Sound does not exist");
                 break;
         }
     }

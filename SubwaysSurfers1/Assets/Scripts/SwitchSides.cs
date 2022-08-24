@@ -16,25 +16,27 @@ public class SwitchSides : MonoBehaviour
     Vector2 startMousePos;
     Vector2 endMousePos;
 
-
-
+    public GameObject pausedMenu;
+    bool avaibleToSwitch;
     private void Start()
     {
         maxAnimator = GetComponent<Animator>();
+
         
+         
     }
 
     void Update()
     {
         
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !PlayerScript.instance.isDead) 
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !PlayerScript.instance.isDead && !pausedMenu.activeSelf) 
         {
             startMousePos = Input.mousePosition;
             
         }
 
-        if (Input.GetKeyUp(KeyCode.Mouse0) && !PlayerScript.instance.isDead) 
+        if (Input.GetKeyUp(KeyCode.Mouse0) && !PlayerScript.instance.isDead && !pausedMenu.activeSelf) 
         {
 
             endMousePos = Input.mousePosition;

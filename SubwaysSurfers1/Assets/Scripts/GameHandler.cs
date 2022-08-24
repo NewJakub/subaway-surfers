@@ -50,13 +50,13 @@ public class GameHandler : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        SaveData sd2 = new SaveData() { sound = 0 };
+        SaveData sd = new SaveData() { sound = 0 };
 
         AudioListener.volume = slider.value;
-        sd2.sound = AudioListener.volume;
+        sd.sound = AudioListener.volume;
 
         string dir = Application.dataPath + directory;
-        string json = JsonUtility.ToJson(sd2);
+        string json = JsonUtility.ToJson(sd);
         //Prepisujeme data
         File.WriteAllText(dir + fileName, json);
     }

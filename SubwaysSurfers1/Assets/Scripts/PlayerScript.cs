@@ -26,10 +26,26 @@ public class PlayerScript : MonoBehaviour
     {
         if (other.CompareTag("Coin"))
         {
+            int r = Random.Range(0, 3);
             GameManager.instance.score++;
             //Updatuje score
             scoreText.text = $"Score: {GameManager.instance.score}";
             Destroy(other.gameObject);
+            switch (r)
+            {
+                case 0:
+                    GameManager.instance.PlaySound("coin_1");
+                    break;
+
+                case 1:
+                    GameManager.instance.PlaySound("coin_2");
+                    break;
+
+                case 2:
+                    GameManager.instance.PlaySound("coin_3");
+                    break;
+            }
+            
         }
 
         //Pro prekazky u kterych se da slidovat
