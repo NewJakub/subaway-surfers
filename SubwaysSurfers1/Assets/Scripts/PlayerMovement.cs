@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement instance;
     public LayerMask groundLayers;
 
+    Vector2 startMousePos;
+    Vector2 endMousePos;
 
     const float speed = 40;
     const float jumpForce = 7;
@@ -19,9 +21,9 @@ public class PlayerMovement : MonoBehaviour
     Animator maxAnimator;
 
     public bool isSliding = false;
-    
 
-
+    float subtractionNum;
+    float positionNum;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -67,6 +69,42 @@ public class PlayerMovement : MonoBehaviour
             StopCoroutine(SlideTiming());
         }
 
+        //lllllllllllllllllllllllllllllllllllll
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !PlayerScript.instance.isDead )
+        {
+            startMousePos = Input.mousePosition;
+            print(subtractionNum);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse0) && !PlayerScript.instance.isDead )
+        {
+
+            endMousePos = Input.mousePosition;
+            subtractionNum = startMousePos.y - endMousePos.y;
+            print(subtractionNum);
+        }
+
+        if (subtractionNum < 40 && subtractionNum > -40)
+        {
+
+            subtractionNum = 0;
+
+        }
+
+        #region CharacterMove
+        if (subtractionNum < 0)
+        {
+            //Jde do prava
+
+            Slide();
+
+            
+        }
+        
+        
+        
+        #endregion
     }
 
 

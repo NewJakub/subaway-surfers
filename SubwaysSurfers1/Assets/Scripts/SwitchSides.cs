@@ -33,7 +33,7 @@ public class SwitchSides : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) && !PlayerScript.instance.isDead && !pausedMenu.activeSelf) 
         {
             startMousePos = Input.mousePosition;
-            
+            print(subtractionNum);
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse0) && !PlayerScript.instance.isDead && !pausedMenu.activeSelf) 
@@ -41,6 +41,14 @@ public class SwitchSides : MonoBehaviour
 
             endMousePos = Input.mousePosition;
             subtractionNum = startMousePos.x - endMousePos.x;
+            print(subtractionNum);
+        }
+
+        if(subtractionNum < 40 && subtractionNum > -40) 
+        {
+
+            subtractionNum = 0;
+
         }
 
         #region CharacterMove
