@@ -43,10 +43,7 @@ public class PlayerMovement : MonoBehaviour
         # region JumpingRegion
         if (IsGrounded() && Input.GetKeyDown(KeyCode.Space) && !isSliding)
         {
-            maxAnimator.SetBool("isJumping", true);
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
-            GameManager.instance.PlaySound("swipeUp");
+            Jump();
         }
 
         else if (!Input.GetKeyDown(KeyCode.Space))
@@ -85,10 +82,17 @@ public class PlayerMovement : MonoBehaviour
             print(subtractionNum);
         }
 
-        if (subtractionNum < 40 && subtractionNum > -40)
+        if ( subtractionNum > -40)
         {
 
             subtractionNum = 0;
+            SetZero();
+        }
+        else if(subtractionNum < 40 ) 
+        {
+
+            Jump();
+            SetZero();
 
         }
 
@@ -116,6 +120,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
     
+
+    void Jump()
+    {
+        maxAnimator.SetBool("isJumping", true);
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+        GameManager.instance.PlaySound("swipeUp");
+    }
 
     #region SlidingSetupRegion
 
@@ -149,6 +161,15 @@ public class PlayerMovement : MonoBehaviour
 
     #endregion
 
+
+    void SetZero()
+    {
+        //Setuje mouse pos na 0 a hraje zvuk
+        subtractionNum = 0;
+        startMousePos.x = 0f;
+        endMousePos.x = 0f;
+        GameManager.instance.PlaySound("swipeMove");
+    }
 }
 
 
