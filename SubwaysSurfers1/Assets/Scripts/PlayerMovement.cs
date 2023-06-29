@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     float height;
     public float crouchedHeight;
 
-    Rigidbody rb;
+    CharacterController con;
     CapsuleCollider col;
     Animator maxAnimator;
 
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     float positionNum;
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        con = GetComponent<CharacterController>();
         col = GetComponent<CapsuleCollider>();
         maxAnimator = GetComponent<Animator>();
 
@@ -37,7 +37,11 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        rb.velocity = new Vector3(0, rb.velocity.y, 1 * speed);
+        Vector3 moveVector = Vector3.zero;
+        moveVector.z = speed;
+
+
+        con.Move(moveVector * Time.deltaTime);
         
 
         # region JumpingRegion
@@ -88,23 +92,10 @@ public class PlayerMovement : MonoBehaviour
             subtractionNum = 0;
             SetZero();
         }
-        else if(subtractionNum < 40 ) 
-        {
-
-            Jump();
-            SetZero();
-
-        }
+       
 
         #region CharacterMove
-        if (subtractionNum < 0)
-        {
-            //Jde do prava
-
-            Slide();
-
-            
-        }
+        
         
         
         
@@ -124,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         maxAnimator.SetBool("isJumping", true);
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+       
 
         GameManager.instance.PlaySound("swipeUp");
     }

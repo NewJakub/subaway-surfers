@@ -7,10 +7,13 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
         pauseMenu.SetActive(false);
+        
     }
 
     // Update is called once per frame
@@ -18,18 +21,15 @@ public class PauseMenu : MonoBehaviour
     {
 
         //Checkuje jestli je pause menu active
-        if (pauseMenu.active == false && Input.GetKeyDown(KeyCode.Escape)) 
+        if (pauseMenu.activeInHierarchy == false && Input.GetKeyDown(KeyCode.Escape)) 
         {
 
-            pauseMenu.SetActive(true);
-            Time.timeScale = 0;
-        
+            PauseGame();
         }
         else if (Input.GetKeyDown(KeyCode.Escape)) 
         {
 
-            pauseMenu.SetActive(false);
-            Time.timeScale = 1;
+            ResumeGame();
         }
 
 
@@ -54,7 +54,28 @@ public class PauseMenu : MonoBehaviour
 
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
+        AudioSource[] audios = FindObjectsOfType<AudioSource>();
+        foreach (AudioSource a in audios) 
+        {
+
+            a.Play();
+        
+        }
+    }
+    void PauseGame() 
+    {
+
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0;
+        AudioSource[] audios = FindObjectsOfType<AudioSource>();
+        foreach (AudioSource a in audios)
+        {
+
+            a.Pause();
+
+
+        }
+
 
     }
-
 }
